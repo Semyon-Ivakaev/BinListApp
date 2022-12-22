@@ -67,7 +67,7 @@
                     app:layout_constraintBottom_toTopOf="@id/model_card_view"
                     app:layout_constraintStart_toEndOf="@id/bin_number_edit_text"
                     app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    android:text="Search"/>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/model_card_view"
@@ -80,224 +80,239 @@
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp"
                     app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/grey">
+                    app:cardBackgroundColor="@color/grey"
+                    android:visibility="invisible"
+                    tools:visibility="visible">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="4dp">
-                    <TextView
-                        android:id="@+id/scheme_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        tools:text="SCHEME / NETWORK"/>
-                    <TextView
-                        android:id="@+id/scheme_value_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/scheme_text_view"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="4dp"
-                        tools:text="Visa"/>
 
-                    <TextView
-                        android:id="@+id/brand_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/scheme_value_text_view"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        tools:text="BRAND"/>
-                    <TextView
-                        android:id="@+id/brand_value_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/brand_text_view"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/card_number_text_view"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        tools:text="Visa/Dankort"/>
+                        <TextView
+                            android:id="@+id/scheme_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:text="SCHEME / NETWORK" />
 
-                    <TextView
-                        android:id="@+id/card_number_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/brand_value_text_view"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        tools:text="CARD NUMBER"/>
-                    <TextView
-                        android:id="@+id/length_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/card_number_text_view"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:textSize="12sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:paddingEnd="16dp"
-                        tools:text="LENGTH"/>
-                    <TextView
-                        android:id="@+id/length_value_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/length_text_view"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        tools:text="16"/>
+                        <TextView
+                            android:id="@+id/scheme_value_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/scheme_text_view"
+                            tools:text="Visa" />
 
-                    <TextView
-                        android:id="@+id/luhn_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/card_number_text_view"
-                        app:layout_constraintStart_toEndOf="@id/length_text_view"
-                        android:textSize="12sp"
-                        android:textColor="@color/cardview_dark_background"
-                        tools:text="LUHN"/>
-                    <TextView
-                        android:id="@+id/luhn_value_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/luhn_text_view"
-                        app:layout_constraintStart_toEndOf="@id/length_text_view"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        tools:text="Yes"/>
+                        <TextView
+                            android:id="@+id/brand_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/scheme_value_text_view"
+                            android:text="BRAND" />
 
-                    <TextView
-                        android:id="@+id/type_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        tools:text="Type"
-                        />
-                    <TextView
-                        android:id="@+id/type_value_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/type_text_view"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        tools:text="Debit"/>
+                        <TextView
+                            android:id="@+id/brand_value_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@id/card_number_text_view"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/brand_text_view"
+                            tools:text="Visa/Dankort" />
 
-                    <TextView
-                        android:id="@+id/prepaid_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/type_value_text_view"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        tools:text="BRAND"/>
-                    <TextView
-                        android:id="@+id/prepaid_value_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/prepaid_text_view"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        tools:text="No"/>
+                        <TextView
+                            android:id="@+id/card_number_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/brand_value_text_view"
+                            android:text="CARD NUMBER" />
 
-                    <TextView
-                        android:id="@+id/country_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/brand_value_text_view"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        tools:text="CARD NUMBER"/>
-                    <TextView
-                        android:id="@+id/country_value_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/country_text_view"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        tools:text="🇩🇰 Denmark"/>
-                    <TextView
-                        android:id="@+id/geo_value_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/country_value_text_view"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        tools:text="(latitude: 56, longitude: 10)"/>
+                        <TextView
+                            android:id="@+id/length_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="16dp"
+                            android:text="LENGTH"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/card_number_text_view" />
 
-                    <androidx.constraintlayout.widget.Barrier
-                        android:id="@+id/bank_barrier"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:constraint_referenced_ids="geo_value_text_view,luhn_value_text_view"
-                        app:barrierDirection="bottom"/>
-                    <TextView
-                        android:id="@+id/bank_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/bank_barrier"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        tools:text="BANK"/>
-                    <TextView
-                        android:id="@+id/bank_value_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/bank_text_view"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="16sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        tools:text="Jyske Bank, Holstebro"/>
-                    <TextView
-                        android:id="@+id/bank_url_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/bank_value_text_view"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="12sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        tools:text="www.jyskebank.dk"/>
-                    <TextView
-                        android:id="@+id/phone_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/bank_url_text_view"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="12sp"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textStyle="bold"
-                        tools:text="+4589893600"/>
+                        <TextView
+                            android:id="@+id/length_value_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/length_text_view"
+                            tools:text="16" />
+
+                        <TextView
+                            android:id="@+id/luhn_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toEndOf="@id/length_text_view"
+                            app:layout_constraintTop_toBottomOf="@id/card_number_text_view"
+                            android:text="LUHN" />
+
+                        <TextView
+                            android:id="@+id/luhn_value_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@id/length_text_view"
+                            app:layout_constraintTop_toBottomOf="@id/luhn_text_view"
+                            tools:text="Yes" />
+
+                        <TextView
+                            android:id="@+id/type_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:text="Type" />
+
+                        <TextView
+                            android:id="@+id/type_value_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/type_text_view"
+                            tools:text="Debit" />
+
+                        <TextView
+                            android:id="@+id/prepaid_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/type_value_text_view"
+                            android:text="BRAND" />
+
+                        <TextView
+                            android:id="@+id/prepaid_value_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/prepaid_text_view"
+                            tools:text="No" />
+
+                        <TextView
+                            android:id="@+id/country_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/brand_value_text_view"
+                            android:text="CARD NUMBER" />
+
+                        <TextView
+                            android:id="@+id/country_value_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/country_text_view"
+                            tools:text="🇩🇰 Denmark" />
+
+                        <TextView
+                            android:id="@+id/geo_value_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/country_value_text_view"
+                            tools:text="(latitude: 56, longitude: 10)" />
+
+                        <androidx.constraintlayout.widget.Barrier
+                            android:id="@+id/bank_barrier"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:barrierDirection="bottom"
+                            app:constraint_referenced_ids="geo_value_text_view,luhn_value_text_view" />
+
+                        <TextView
+                            android:id="@+id/bank_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/bank_barrier"
+                            android:text="BANK" />
+
+                        <TextView
+                            android:id="@+id/bank_value_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/bank_text_view"
+                            tools:text="Jyske Bank, Holstebro" />
+
+                        <TextView
+                            android:id="@+id/bank_url_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/bank_value_text_view"
+                            tools:text="www.jyskebank.dk" />
+
+                        <TextView
+                            android:id="@+id/phone_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/bank_url_text_view"
+                            tools:text="+4589893600" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
