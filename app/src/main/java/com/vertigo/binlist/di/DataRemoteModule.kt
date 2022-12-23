@@ -19,13 +19,13 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DataRemoteModule {
     @Provides
-    fun providesLogger() = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+    fun provideLogger() = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
 
     @Provides
     fun provideHttpClient() = OkHttpClient.Builder()
         .readTimeout(30, TimeUnit.SECONDS)
         .connectTimeout(30, TimeUnit.SECONDS)
-        .addInterceptor(providesLogger())
+        .addInterceptor(provideLogger())
         .build()
 
     @Provides
