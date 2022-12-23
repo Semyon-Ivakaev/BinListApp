@@ -238,34 +238,50 @@
                             app:layout_constraintTop_toBottomOf="@id/brand_value_text_view"
                             android:text="CARD NUMBER" />
 
-                        <TextView
-                            android:id="@+id/country_value_text_view"
+                        <LinearLayout
+                            android:id="@+id/country_container"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/country_text_view"
-                            tools:text="🇩🇰 Denmark" />
+                            android:orientation="vertical"
+                            >
+                            <TextView
+                                android:id="@+id/country_value_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/country_text_view"
+                                tools:text="🇩🇰 Denmark"
+                                android:layout_gravity="end"
+                                android:layout_weight="1"
+                                android:autoLink="map" />
 
-                        <TextView
-                            android:id="@+id/geo_value_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/country_value_text_view"
-                            tools:text="(latitude: 56, longitude: 10)" />
+                            <TextView
+                                android:id="@+id/geo_value_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/country_value_text_view"
+                                tools:text="(latitude: 56, longitude: 10)"
+                                android:layout_weight="1"
+                                android:layout_gravity="end"
+                                android:autoLink="map" />
+                        </LinearLayout>
+
 
                         <androidx.constraintlayout.widget.Barrier
                             android:id="@+id/bank_barrier"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:barrierDirection="bottom"
-                            app:constraint_referenced_ids="geo_value_text_view,luhn_value_text_view" />
+                            app:constraint_referenced_ids="country_container,luhn_value_text_view" />
 
                         <TextView
                             android:id="@+id/bank_text_view"
@@ -300,7 +316,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/bank_value_text_view"
-                            tools:text="www.jyskebank.dk" />
+                            tools:text="www.jyskebank.dk"
+                            android:autoLink="web" />
 
                         <TextView
                             android:id="@+id/phone_text_view"
@@ -312,7 +329,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/bank_url_text_view"
-                            tools:text="+4589893600" />
+                            tools:text="+4589893600"
+                            android:autoLink="phone" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
