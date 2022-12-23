@@ -40,7 +40,7 @@ class FragmentBinInfo: Fragment() {
 
         with(binding) {
             searchButton.setOnClickListener {
-                val textValue = binNumberEditText.text.toString()
+                val textValue = binNumberEditText.text.toString().replace(" ", "")
                 binInfoViewModel.getBinInfo(binNumber = textValue)
             }
         }
