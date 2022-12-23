@@ -1,6 +1,9 @@
 package com.vertigo.binlist.presentation.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,10 +75,25 @@ class FragmentBinInfo: Fragment() {
             countryValueTextView.text = "${binApiInfo?.country?.emoji} ${binApiInfo?.country?.name}"
             geoValueTextView.text = "(latitude: ${binApiInfo?.country?.latitude}, longitude: ${binApiInfo?.country?.longitude})"
             bankValueTextView.text = "${binApiInfo?.bank?.name}, ${binApiInfo?.bank?.city}"
-            bankUrlTextView.text = binApiInfo?.bank?.url
-            phoneTextView.text = binApiInfo?.bank?.phone
+
+            bankUrlTextView.apply {
+                text = binApiInfo?.bank?.url
+                setOnClickListener {
+                    initWebIntent(binApiInfo?.bank?.url)
+                }
+            }
+            phoneTextView.apply {
+                text = binApiInfo?.bank?.phone
+                setOnClickListener {
+                    initPhoneIntent(binApiInfo?.bank?.phone)
+                }
+            }
+
+                countryContainer.setOnClickListener {
+                    initMapsIntent(binApiInfo?.country?.latitude, binApiInfo?.country?.longitude)
+                }
+            }
         }
-    }
 
     private fun clearBinInfo() {
         with(binding) {
@@ -101,6 +119,25 @@ class FragmentBinInfo: Fragment() {
             historyRecycler.layoutManager = layoutManager
             historyRecycler.itemAnimator = DefaultItemAnimator()
         }
+    }
+
+    private fun initMapsIntent(latitude: Int?, longitude: Int?) {
+        val gmmIntentUri = Uri.parse("geo:${latitude},${longitude}")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        startActivity(mapIntent)
+    }
+
+    private fun initPhoneIntent(phoneNumber: String?) {
+        val phoneIntent = Intent(Intent.ACTION_DIAL, Uri.parse(phoneNumber))
+        startActivity(phoneIntent)
+    }
+
+
+    private fun initWebIntent(webUrl: String?) {
+        val url = if (webUrl?.contains("https://") == true) webUrl else "https://${webUrl}"
+        val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(webIntent)
     }
 
     override fun onDestroy() {
