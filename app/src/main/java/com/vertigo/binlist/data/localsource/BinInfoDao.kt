@@ -12,5 +12,5 @@ interface BinInfoDao {
     suspend fun insert(binInfo: LocalBinInfo)
 
     @Query("SELECT * FROM request_bin_list")
-    fun getBinList(): List<LocalBinInfo>
+    suspend fun getBinList(): List<LocalBinInfo>
 }

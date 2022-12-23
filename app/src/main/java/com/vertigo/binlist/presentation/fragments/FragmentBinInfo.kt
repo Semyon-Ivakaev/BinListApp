@@ -38,6 +38,10 @@ class FragmentBinInfo: Fragment() {
             }
         }
 
+        binInfoViewModel.binList.observe(viewLifecycleOwner) {
+            resource -> Log.v("App", resource.toString())
+        }
+
         with(binding) {
             searchButton.setOnClickListener {
                 val textValue = binNumberEditText.text.toString().replace(" ", "")
