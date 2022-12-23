@@ -1,6 +1,5 @@
 package com.vertigo.binlist.presentation.fragments
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,23 +30,36 @@ class BinInfoViewModel @Inject constructor(
         getBinListFromDb()
     }
 
+    /**
+     * binNumber - номер BIN без пробелов
+     * Если передали пустоту - то выводим Toast с сообщение.
+     * Иначе делаем запрос по номеру.
+     *
+     * Если запрос успешен, то добавляем номер в Историю запросов.
+     * Иначе выводим сообщение с ошибкой. Если response.code() == 429 - "Превышено количество запросов", иначе "Некорректный запрос"
+     *
+     * В завершении запрашиваем из базы данных весь список запросов и обновляем историю.
+     */
     fun getBinInfo(binNumber: String) {
         viewModelScope.launch {
-            _binInfo.postValue(Resource.Loading())
-
-            val response = getBinInfoUseCase.execute(binNumber = binNumber)
-            if (response.isSuccessful) {
-                response.body().let { data ->
-                    _binInfo.postValue(Resource.Success(data))
-                    val localBin = LocalBinInfo(number = binNumber, scheme = data?.scheme ?: "Scheme not found")
-                    addBinInDBUseCase.execute(binInfo = localBin)
+            if (binNumber.isNotEmpty()) {
+                _binInfo.postValue(Resource.Loading())
+                val response = getBinInfoUseCase.execute(binNumber = binNumber)
+                if (response.isSuccessful) {
+                    response.body().let { data ->
+                        _binInfo.postValue(Resource.Success(data))
+                        val localBin = LocalBinInfo(number = binNumber, scheme = data?.scheme ?: "Scheme not found")
+                        addBinInDBUseCase.execute(binInfo = localBin)
+                    }
+                } else {
+                    val responseCode = response.code()
+                    val errorMessage = if (responseCode == 429) "Превышено количество запросов" else "Некорректный запрос"
+                    _binInfo.postValue(Resource.Error(message = errorMessage))
                 }
+                getBinListFromDb()
             } else {
-                val responseCode = response.code()
-                val errorMessage = if (responseCode == 429) "Превышено количество запросов" else "Некорректный запрос"
-                _binInfo.postValue(Resource.Error(message = errorMessage))
+                _binInfo.postValue(Resource.Error(message = "Некорректный запрос"))
             }
-            getBinListFromDb()
         }
     }
 
