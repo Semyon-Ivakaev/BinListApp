@@ -1,7 +1,6 @@
 package com.vertigo.binlist.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,14 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.vertigo.binlist.data.localsource.LocalBinInfo
 import com.vertigo.binlist.data.remotesource.BinApiResponse
 import com.vertigo.binlist.databinding.FragmentBinInfoBinding
+import com.vertigo.binlist.presentation.adapters.BinAdapter
 import com.vertigo.binlist.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,6 +25,8 @@ class FragmentBinInfo: Fragment() {
     private val binding get() = _binding!!
 
     private val binInfoViewModel: BinInfoViewModel by viewModels()
+    private lateinit var binAdapter: BinAdapter
+    private lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +36,7 @@ class FragmentBinInfo: Fragment() {
         _binding = FragmentBinInfoBinding.inflate(inflater, container, false)
 
         val view = binding.root
+        createAdapter()
 
         binInfoViewModel.binInfo.observe(viewLifecycleOwner) { resource ->
             when (resource) {
@@ -39,7 +47,7 @@ class FragmentBinInfo: Fragment() {
         }
 
         binInfoViewModel.binList.observe(viewLifecycleOwner) {
-            resource -> Log.v("App", resource.toString())
+            resource -> updateAdapter(binList = resource)
         }
 
         with(binding) {
@@ -72,6 +80,26 @@ class FragmentBinInfo: Fragment() {
     private fun clearBinInfo() {
         with(binding) {
             modelCardView.isVisible = false
+        }
+    }
+
+    private fun createAdapter() {
+        binAdapter = BinAdapter()
+        layoutManager = GridLayoutManager(context, 1, RecyclerView.VERTICAL, false)
+        with(binding) {
+            historyRecycler.adapter = binAdapter
+            historyRecycler.layoutManager = layoutManager
+            historyRecycler.itemAnimator = DefaultItemAnimator()
+        }
+    }
+
+    private fun updateAdapter(binList: List<LocalBinInfo>) {
+        binAdapter = BinAdapter()
+        binAdapter.submitList(binList)
+        with(binding) {
+            historyRecycler.adapter = binAdapter
+            historyRecycler.layoutManager = layoutManager
+            historyRecycler.itemAnimator = DefaultItemAnimator()
         }
     }
 
