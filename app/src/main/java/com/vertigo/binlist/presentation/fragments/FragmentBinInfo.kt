@@ -3,7 +3,6 @@ package com.vertigo.binlist.presentation.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,24 +65,24 @@ class FragmentBinInfo: Fragment() {
     private fun setAllValue(binApiInfo: BinApiResponse?) {
         with(binding) {
             modelCardView.isVisible = true
-            brandValueTextView.text = binApiInfo?.brand
-            schemeValueTextView.text = binApiInfo?.scheme
-            lengthValueTextView.text = binApiInfo?.number?.length.toString()
-            luhnValueTextView.text = binApiInfo?.number?.luhn.toString()
-            typeValueTextView.text = binApiInfo?.type
-            prepaidValueTextView.text = binApiInfo?.prepaid.toString()
-            countryValueTextView.text = "${binApiInfo?.country?.emoji} ${binApiInfo?.country?.name}"
-            geoValueTextView.text = "(latitude: ${binApiInfo?.country?.latitude}, longitude: ${binApiInfo?.country?.longitude})"
-            bankValueTextView.text = "${binApiInfo?.bank?.name}, ${binApiInfo?.bank?.city}"
+            brandValueTextView.text = getCorrectStringData(binApiInfo?.brand)
+            schemeValueTextView.text = getCorrectStringData(binApiInfo?.scheme)
+            lengthValueTextView.text = getCorrectStringData(binApiInfo?.number?.length.toString())
+            luhnValueTextView.text = getCorrectBooleanData(binApiInfo?.number?.luhn)
+            typeValueTextView.text = getCorrectStringData(binApiInfo?.type)
+            prepaidValueTextView.text = getCorrectBooleanData(binApiInfo?.prepaid)
+            countryValueTextView.text = "${getCorrectStringData(binApiInfo?.country?.emoji)} ${getCorrectStringData(binApiInfo?.country?.name)}"
+            geoValueTextView.text = "(latitude: ${getCorrectIntData(binApiInfo?.country?.latitude)}, longitude: ${getCorrectIntData(binApiInfo?.country?.longitude)})"
+            bankValueTextView.text = "${getCorrectStringData(binApiInfo?.bank?.name)} ${getCorrectStringData(binApiInfo?.bank?.city)}"
 
             bankUrlTextView.apply {
-                text = binApiInfo?.bank?.url
+                text = getCorrectStringData(binApiInfo?.bank?.url)
                 setOnClickListener {
                     initWebIntent(binApiInfo?.bank?.url)
                 }
             }
             phoneTextView.apply {
-                text = binApiInfo?.bank?.phone
+                text = getCorrectStringData(binApiInfo?.bank?.phone)
                 setOnClickListener {
                     initPhoneIntent(binApiInfo?.bank?.phone)
                 }
@@ -94,6 +93,18 @@ class FragmentBinInfo: Fragment() {
                 }
             }
         }
+
+    private fun getCorrectStringData(text: String?): String {
+        return if (text.isNullOrEmpty()) "" else text
+    }
+
+    private fun getCorrectIntData(number: Int?): String {
+        return if (number.toString().isEmpty()) "-" else number.toString()
+    }
+
+    private fun getCorrectBooleanData(value: Boolean?): String {
+        return if (value == true) "Yes" else "No"
+    }
 
     private fun clearBinInfo() {
         with(binding) {
