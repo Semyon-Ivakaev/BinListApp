@@ -12,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bin_scheme"
-        android:textSize="16dp"
+        android:textSize="16sp"
         tools:text="1111111"/>
 
     <TextView
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/bin_number_text_view"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="16dp"
+        android:textSize="16sp"
         tools:text="Visa"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@ class DataLocalModule {
     @Provides
     @Singleton
     fun provideBinInfoDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
-        context, BinInfoDatabase::class.java, "bin_info_database1"
+        context, BinInfoDatabase::class.java, "bin_info_database"
     ).build()
 
     @Provides
